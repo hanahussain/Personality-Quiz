@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en-us">
+    <head>
+        <title>Start</title>
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <body>
+        <h1 class = "font-effect-outline">4 Temperaments Personality Quiz</h1>
+        <p class = "question">
+            This personality quiz will categorize you into one of four personality temperaments:
+            <ul>
+                <li>Saguine, the spontaneous social butterflies</li>
+                <li>Choleric, the leaders and world shakers</li>
+                <li>Melancholic, the deep thinkers and feelers</li>
+                <li>Or Phlegmatic, the social supporters</li>
+            </ul>
+        </p>
+        <p class = "question">
+            Ready to start the quiz?
+        </p>
+    <form action = "/q1"
+          method = "post">
+        <button type = "submit">
+            Start Quiz
+        </button>
+    </form>
+    </body>
+</html>

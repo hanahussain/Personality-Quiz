@@ -1,0 +1,91 @@
+<!--Set up the doctype -->
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Question 1” -->
+        <title>Question 1</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “Question 1” -->
+        <h1 class = "font-effect-outline">Question 1</h1>
+        <!--Make a paragraph asking the Saguine question “You can start a conversation with just about anyone” -->
+        <p class = "question">
+            You can start a conversation with just about anyone.
+        </p>
+    <!--Make a form with action attribute that goes to “/q2” and post method attribute: -->
+    <form action = "/q2"
+          method = "post">
+        <!--Make a paragraph for first answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “oneAnswer”
+                id attribute is “A”
+                value attribute is also “A” -->
+            <input type = "radio"
+               name = "oneAnswer"
+               id = "A"
+               value = "A" />
+            <!--label attribute is “Strongly Agree” -->
+            <label for = "A">Strongly Agree</label>
+        </p>
+        <!--Make a paragraph for second answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “oneAnswer”
+                id attribute is “B”
+                value attribute is also “B” -->
+            <input type = "radio"
+               name = "oneAnswer"
+               id = "B"
+               value = "B" />
+             <!--label attribute is “Agree” -->
+            <label for = "B">Agree</label>
+        </p>
+        <!--Make a paragraph for third answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “oneAnswer”
+                id attribute is “C”
+            value attribute is also “C” -->
+            <input type = "radio"
+               name = "oneAnswer"
+               id = "C"
+               value = "C"/>
+             <!--label attribute is “Disagree” -->
+            <label for = "C">Disagree</label>
+        </p>
+        <!--Make a paragraph for fourth answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “oneAnswer”
+                id attribute is “D”
+                value attribute is also “D” -->
+            <input type = "radio"
+               name = "oneAnswer"
+               id = "D"
+               value = "D"/>
+             <!--label attribute is “Strongly Disagree” -->
+            <label for = "D">Strongly Disagree</label>
+        </p>
+        <!--Make a paragraph for submit button: -->
+        <p>
+            <!-- Button type is “submit” -->
+            <button type = "submit">
+            <!--and the text will be “next” -->
+            Next
+        </button>
+        </p>
+    </form>
+    </body>

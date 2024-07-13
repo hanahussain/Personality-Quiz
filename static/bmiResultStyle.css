@@ -1,0 +1,28 @@
+body {
+    /*make the background of the entire thing light blue */
+    background-color: #acf1de;
+}
+
+/*in h1: */
+h1 {
+    /*center align the text */
+    text-align: center;
+    /*make the font "Cormorant Upright" */
+    font-family: 'Cormorant Upright';
+    /*make the size of the header 29px */
+    font-size: 29px;
+}
+
+/*in h2: */
+ h2{
+    /*make the font "Cormorant Upright" */
+    font-family: 'Cormorant Upright';
+    /*make the size of the header 29px */
+    font-size: 29px;
+}
+
+/*have a paragraph id #first: */
+    #first {
+    /*center align the text */
+    text-align: center;
+}

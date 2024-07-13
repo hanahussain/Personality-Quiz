@@ -1,0 +1,153 @@
+<!--Have a chunk of python code:-->
+<%
+#Import request library
+from bottle import request
+
+#Declare and initialize “score” variable to 3333
+score = 3333
+
+#Declare and initialize “answers” variable to be an empty string
+answers = ""
+#Request the “oneAnswer” from the previous page and set it equal to “oneAnswer”
+oneAnswer = request.forms.get("oneAnswer")
+
+#If oneAnswer is equal to “A”:
+if(oneAnswer == "A"):
+  #Increment score by 2000
+  score += 2000
+#Otherwise if oneAnswer is equal to “B”:
+elif(oneAnswer == "B"):
+  #Increment score by 1000
+  score += 1000
+#Otherwise if oneAnswer is equal to “C”:
+elif(oneAnswer == "C"):
+  #Decrement score by 1000
+  score -=1000
+#Otherwise if oneAnswer is equal to "D":
+elif(oneAnswer == "D"):
+  #Decrement score by 2000
+  score -= 2000
+#Otherwise, assuming there was no input:
+else:
+  #Set oneeAnswer equal to the string 0
+  oneAnswer = "0"
+#end the python block
+end
+
+#Concatenate “oneAnswer” and a space key to answers variable
+answers += oneAnswer + " "
+
+#End the python code
+end
+%>
+
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Question 2” -->
+        <title>Question 2</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+                <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “Question 2” -->
+        <h1 class = "font-effect-outline">Question 2</h1>
+        <!--Make a paragraph asking the Melancholic Question “You are an emotional person, prone to crying or laughing at the drop of a hat” -->
+        <p class = "question">
+            You are an emotional person, prone to crying or laughing at the drop of a hat.
+        </p>
+    <!--Make a form with action attribute that goes to “/q3” and post method attribute: -->
+    <form action = "/q3"
+          method = "post">
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “score”
+            Value attribute will be the python value of “score” -->
+        <input type = "hidden"
+               name = "score"
+               value = "{{ score }}" />
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “answers”
+            Value attribute will be the python value of “answers” -->
+        <input type = "hidden"
+               name = "answers"
+               value = "{{ answers }}" />
+        <!--Make a paragraph for first answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “twoAnswer”
+                id attribute is “A”
+                value attribute is also “A” -->
+            <input type = "radio"
+               name = "twoAnswer"
+               id = "A"
+               value = "A" />
+            <!--label attribute is “Strongly Agree” -->
+            <label for = "A">Strongly Agree</label>
+        </p>
+        <!--Make a paragraph for second answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “twoAnswer”
+                id attribute is “B”
+                value attribute is also “B” -->
+            <input type = "radio"
+               name = "twoAnswer"
+               id = "B"
+               value = "B" />
+             <!--label attribute is “Agree” -->
+            <label for = "B">Agree</label>
+        </p>
+        <!--Make a paragraph for third answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “twoAnswer”
+                id attribute is “C”
+            value attribute is also “C” -->
+            <input type = "radio"
+               name = "twoAnswer"
+               id = "C"
+               value = "C"/>
+             <!--label attribute is “Disagree” -->
+            <label for = "C">Disagree</label>
+        </p>
+        <!--Make a paragraph for fourth answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “twoAnswer”
+                id attribute is “D”
+                value attribute is also “D” -->
+            <input type = "radio"
+               name = "twoAnswer"
+               id = "D"
+               value = "D"/>
+             <!--label attribute is “Strongly Disagree” -->
+            <label for = "D">Strongly Disagree</label>
+        </p>
+        <!--Make a paragraph for submit button: -->
+        <p>
+            <!-- Button type is “submit” -->
+            <button type = "submit">
+            <!--and the text will be “next” -->
+            Next
+        </button>
+        </p>
+    </form>
+    <!--Make a form for back button: -->
+    <form>
+        <!--Button type is “button”, onclick event is “history.back()” method, text is “Back” -->
+        <button type = "button"
+                onclick = "history.back()">
+            Back
+        </button>
+    </form>
+    </body>

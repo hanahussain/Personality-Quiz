@@ -1,0 +1,57 @@
+<!--Set up the doctype! -->
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Phlegmatic Result” -->
+        <title>Phlegmatic Result</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “You got: Phlegmatic!” -->
+        <h1 class = "font-effect-outline">You got: Phlegmatic!</h1>
+        <p> </p>
+        <h2>Overview - "Societal Supporters"</h2>
+        <!--Make a paragraph explaining what phlegmatic means. -->
+        <p class = "question">
+            Phlegmatics are known to be relaxed and peaceful. They are and easy temperament type to get along with because they are so agreeable and patient.
+        </p>
+        <h2>Strengths</h2>
+        <!--Make a paragraph with a list of three strengths -->
+        <p>
+            <ul>
+                <li>Well-liked</li>
+                <li>Easy-going</li>
+                <li>Hard workers</li>
+
+            </ul>
+        </p>
+        <h2>Weaknesses</h2>
+        <!--Make a paragraph with a list of three weaknesses -->
+        <p>
+            <ul>
+                <li>Resist changes in their routine</li>
+                <li>Prone to be taken advantage of</li>
+                <li>Unambitious</li>
+            </ul>
+        </p>
+                <!--Make a form with action attribute /start and post method attribute: -->
+        <form action = "/start"
+              method = "route">
+            <p>
+                <!--Make a button of type “submit” with name “Take Quiz Again” -->
+                <button type = "submit">
+                    Take the Quiz Again
+                </button>
+            </p>
+        </form>

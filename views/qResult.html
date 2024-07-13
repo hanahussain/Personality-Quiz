@@ -1,0 +1,241 @@
+<!--Have a chunk of python code -->
+<%
+#Import request library
+from bottle import request
+
+#Request the “twelveAnswer” from the previous page and set it equal to “twelveAnswer”
+twelveAnswer = request.forms.get("twelveAnswer")
+#Request the “score” variable from the previous page and set it equal to “score”
+score = request.forms.get("score")
+#Request the “answers” from the previous page and set it equal to “answers”
+answers = request.forms.get("answers")
+#Split the answers string based on the space delimiter, cast it into a list, and set it equal to “listAnswers”
+answers = list(answers.split(" "))
+
+#If the previous score ends in 0.1 because of phlegmatic negatives:
+if(score.endswith(".1")):
+  #convert score into a float
+  score = float(score)
+#otherwise
+else:
+  #cast score into a float before casting it into an int
+  score = int(float(score))
+#end the python block
+end
+
+#If the integer value of score modulus 10 is greater than 0:
+if(int(score % 10) > 0):
+  #If twelveAnswer is equal to “A”:
+  if(twelveAnswer == "A"):
+    #Increment score by 2
+    score += 2
+  #Otherwise if twelveAnswer is equal to “B”:
+  elif(twelveAnswer == "B"):
+    #Increment score by 1
+    score += 1
+  #Otherwise if twelveAnswer is equal to “C”:
+  elif(twelveAnswer == "C"):
+    #Decrement score by 1
+    score -=1
+  #Otherwise if twelveAnswer is equal to "D":
+  elif(twelveAnswer == "D"):
+    #If the integer value of score modulus 10 is greater than 1:
+    if(int(score%10) > 1):
+      #Decrement score by 2
+      score -= 2
+    #Otherwise:
+    else:
+      #Decrement score by 1
+      score -= 1
+    #end the python block
+    end
+  #Otherwise, assuming there was no input:
+  else:
+    #Set twelveAnswer equal to the string 0
+    twelveAnswer = "0"
+  #end the python block
+  end
+#end the python block
+end
+
+#Concatenate “twelveAnswer” and a space key to answers variable
+answers += twelveAnswer
+
+#By this point, score should theoretically be a 4 digit number
+#Store the integer result of score modulus 10 into a local ones variable
+ones = int(score % 10)
+#Do a floor division of score divided by 10
+score = int(score/10)
+#Store the result of score modulus 10 into a local tens variable
+tens = score % 10
+#Do a floor division of score divided by 10
+score = int(score/10)
+#Store the result of score modulus 10 into a local hundreds variable
+hundreds = score % 10
+#Do a floor division of score divided by 10
+score = int(score/10)
+#Store the remaining score variable into a local thousands variable
+thousands = score
+
+#Largest variable will be created and defaulted to the string thousands variable value
+largest = "thousands"
+largestValue = thousands
+#If the hundreds value is greater than the largest value:
+if(hundreds > largestValue):
+  #largest is set equal to the string hundreds value
+  largest = "hundreds"
+  #largestValue is set equal to the hundreds value
+  largestValue = hundreds
+#end the python block
+end
+#If the tens value is greater than largestValue:
+if(tens > largestValue):
+  #largest is set equal to the string tens value
+  largest = "tens"
+  #largestValue is set equal to the tens value
+  largestValue = tens
+#end the python block
+end
+#If the ones value is greater than largestValue:
+if(ones > largestValue):
+  #largest is set equal to the string ones value
+  largest = "ones"
+  #largestValue is set equal to the ones value
+  largestValue = ones
+#end the python block
+end
+
+#Handling ties:
+#If largest is not the thousands variable (Saguine wins all ties by default):
+if(largest != "thousands"):
+  #Make local int pStrong, assign it to a value of 0
+  pStrong = 0
+  #Make local int mStrong, assign it to a value of 0
+  mStrong = 0
+  #Make local int cStrong, assign it to a value of 0
+  cStrong = 0
+  #Have a for loop with variable “i” and a range the length of the answers list:
+  for i in range(len(answers)):
+    #Make local variable qNum, assign it to i+1
+    qNum = i + 1
+    #If qNum is divisible by 4 (on a phlegmatic question):
+    if(qNum % 4 == 0):
+      #If the answers value at position “i” is “A”:
+      if(answers[i] == "A"):
+        #Increment pStrong
+        pStrong += 1
+      #End the python block
+      end
+    #End the python block
+    end
+    #If qNum is divisible by 5 or qNum is 2 (on a melancholic question):
+    if(qNum % 5 == 0 or qNum == 2):
+      #If the answers value at position “i” is “A”:
+      if(answers[i] == "A"):
+        #Increment mStrong
+        mStrong += 1
+      #End the python block
+      end
+    #End the python block
+    end
+    #If qNum is divisible by 3 and not 12 (on a choleric question):
+    if(qNum % 3 == 0 and qNum != 12):
+      #If the answers value at position “i” is “A”:
+      if(answers[i] == "A"):
+        #Increment cStrong
+        cStrong += 1
+      #End the python block
+      end
+    #End the python block
+    end
+  #End the python block
+  end
+  #If largest is the tens variable (can’t be ones if tie):
+  if(largest == "tens"):
+    #If the tens value is equal to the ones value (M/P tie):
+    if(tens == ones):
+      #If pStrong is greater than or equal to mStrong:
+      if(pStrong >= mStrong):
+        #Set largest equal to string ones
+        largest = "ones"
+        #Set largestValue equal to ones
+        largestValue = ones
+      #End the python block
+      end
+    #End the python block
+    end
+  #Otherwise if largest is the hundreds variable:
+  elif(largest == "hundreds"):
+    #If the hundreds value is equal to the ones value (C/P tie):
+    if(hundreds == ones):
+      #If cStrong is less than pStrong:
+      if(cStrong < pStrong):
+        #Set largest equal to string ones
+        largest = "ones"
+        #Set largestValue equal to ones
+        largestValue = ones
+      end
+    #Otherwise if the hundreds value is equal to the tens value:
+    elif(hundreds == tens):
+      #If cStrong is less than mStrong:
+      if(cStrong < mStrong):
+          #Set largest equal to string tens
+          largest = "tens"
+          #Set largestValue equal to tens
+          largestValue = tens
+      #End the python block
+      end
+    #End the python block
+    end
+  #End the python block
+  end
+
+#end the python code
+end
+%>
+
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Result” -->
+        <title>Result</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body class = "biggerImg">
+        <!--Have a level 1 header saying “Almost there...” -->
+        <h1 class = "font-effect-outline">Almost there...</h1>
+        <!--Make a paragraph saying “To confirm your answers, press the button. To go back, press the back button.” -->
+        <p class = "question">
+            To confirm your answers, press the button. To go back, press the back button.
+        </p>
+
+    <!--Make a form with action attribute “/{{ largest }}” and post method attribute: -->
+    <form action = "/{{largest}}"
+          method = "route">
+        <p>
+            <!-- Make a button of type submit with “Submit Answers” written on it -->
+            <button type = "submit">
+                Submit Answers
+            </button>
+        </p>
+    </form>
+    <!--Make a form for back button: -->
+    <form>
+        <!--Button type is “button”, onclick event is “history.back()” method, text is “Back” -->
+        <button type = "button"
+                onclick = "history.back()">
+            Back
+        </button>
+    </form>
+    </body>

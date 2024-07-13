@@ -1,0 +1,123 @@
+<%
+#import request from bottle
+from bottle import request
+
+#request the value of "heightBig" and set it equal to feet variable
+heightBig = request.forms.get("heightBig")
+
+#request the value of "heightSmall" and set it equal to inches variable
+heightSmall = request.forms.get("heightSmall")
+
+#request the value of "weight" and set it equal to weight variable
+weight = request.forms.get("weight")
+
+#request the value of "metric" and set it equal to metric variable
+metric = request.forms.get("metric")
+
+
+#cast heightBig into an float
+heightBig = float(heightBig)
+
+#round heightBig to 3 decimal places
+#heightBig = round(heightBig, 3)
+
+#cast heightSmall into an float
+heightSmall = float(heightSmall)
+
+#round heightSmall to 2 decimal places
+#inches = round(inches, 2)
+
+#cast weight into an float
+weight = float(weight)
+
+#round weight to 3 decimal places
+#weight = round(weight, 3)
+
+#cast metric to an int
+metric = int(metric)
+
+
+#if metric has a value of 1 (meaning the variables are in metric units):
+if(metric == 1):
+  #multiply heightBig by 3.281, set it equal to heightBig
+  heightBig = heightBig * 3.281
+
+  #divide heightSmall by 2.54, set it equal to heightSmall
+  heightSmall = heightSmall / 2.54
+
+  #multiply weight by 2.205, set it equal to weight
+  weight *= 2.205
+end
+
+#multiply heightBig variable with 12, add that to existing heightSmall and set equal to height variable
+height = (heightBig*12) + heightSmall
+
+#divide weight by height squared, multiply by 703 and set product equal to bmi variable
+bmi = (weight / (height ** 2)) * 703
+
+#round bmi to 1 decimal
+bmi = round(bmi, 1)
+
+#declare a status variable to be an empty string
+status = ""
+#if bmi is below 18.5:
+if(bmi < 18.5):
+  #set status to "underweight"
+  status = "underweight"
+#otherwise if bmi is less than or equal to 24.9:
+elif(bmi <= 24.9):
+  #set status to "healthy"
+  status = "healthy"
+#otherwise if bmi is less than or equal to 29.9:
+elif(bmi <= 29.9):
+  #set status to "overweight"
+  status = "overweight"
+#otherwise:
+else:
+  #set status equal to "obese"
+  status = "obese"
+
+#end python code
+end
+%>
+
+<!--set up the doctype -->
+<!DOCTYPE html>
+<!--set the language to english -->
+<html lang = "en-us">
+    <!--in the head container: -->
+    <head>
+        <!--title the tab "BMI Result" -->
+        <title>BMI Result</title>
+        <!--make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to bmiResultStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/bmiResultStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright' rel='stylesheet'>
+    </head>
+
+    <!--in body container: -->
+    <body>
+        <!--make a level 1 header with text "Result" -->
+        <h1>Result</h1>
+        <!--have a paragraph with id "first": -->
+        <p id = "first">
+            <!--have text for bmi (python variable) and indicate status (python variable) -->
+            Your BMI is {{ bmi }}, indicating your weight is in the {{ status }} category for your height.
+        </p>
+        <!--have a paragraph: -->
+        <p></p>
+        <!--make a level 2 header with text "BMI Categories" -->
+        <h2>BMI Categories</h2>
+        <!--make a paragraph saying "Underweight: less than 18.5" -->
+        <p> Underweight: less than 18.5 </p>
+        <!--make a paragraph saying "Healthy: between 18.5 and 24.9" -->
+        <p> Healthy: between 18.5 and 24.9 </p>
+        <!--make a paragraph saying "Healthy: between 25 and 29.9" -->
+        <p> Overweight: between 25 and 29.9 </p>
+        <!--make a paragraph saying "Obese: over 30" -->
+        <p> Obese: over 30 </p>
+    </body>

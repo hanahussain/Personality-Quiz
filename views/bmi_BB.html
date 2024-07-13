@@ -1,0 +1,56 @@
+<!--set up the doctype -->
+<!DOCTYPE html>
+<!--set the language to english -->
+<html lang = "en-us">
+    <!--in the head container: -->
+    <head>
+        <!--title the tab "Body Mass Index" -->
+        <title>Body Mass Index</title>
+        <!--make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to bmiStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/bmiStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright' rel='stylesheet'>
+    </head>
+
+    <!--in the body container: -->
+    <body>
+        <!--make a level one header saying "BMI Calculator" -->
+        <h1>BMI Calculator</h1>
+        <p id = "firstPara">
+            <!-- have the link to bmi_metric.html -->
+        <a href = "bmi_metric">Metric Version</a>
+        </p>
+    <!--make a form with action attribute "bmi_BB_result" and post method -->
+    <form action = "/bmi_BB_result"
+          method = "post">
+        <input type = "hidden"
+               name = "metric"
+               value = "0" />
+        <!--make a label: "Height (ft)" -->
+        <label>Height (ft)</label>
+        <!--have an input of type text, named "feet" and with a value of 0 -->
+        <input type = "text"
+               name = "heightBig"
+               value = "0" />
+        <!--make a label: "Height (in)" -->
+        <label>Height (in)</label>
+        <!--have an input of type text, named "inches" and with a value of 0 -->
+        <input type = "text"
+               name = "heightSmall"
+               value = "0" />
+        <!--make a label: "Weight (lbs)" -->
+        <label>Weight (lbs)</label>
+        <!--have an input of type text, named "weight" and with a value of 0 -->
+        <input type = "text"
+               name = "weight"
+               value = "0" />
+        <!--make a button with text "Calculate" of type "submit" -->
+        <button type = "submit">
+            Calculate
+        </button>
+    </form>
+    </body>

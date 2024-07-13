@@ -1,0 +1,173 @@
+<!--Have a chunk of python code -->
+<%
+#Import request library
+from bottle import request
+
+#Request the “fiveAnswer” from the previous page and set it equal to “fiveAnswer”
+fiveAnswer = request.forms.get("fiveAnswer")
+#Request the “score” variable from the previous page and set it equal to “score”
+score = request.forms.get("score")
+#Request the “answers” from the previous page and set it equal to “answers”
+answers = request.forms.get("answers")
+
+#Cast score to an int
+score = int(score)
+
+#If fiveAnswer is equal to “A”:
+if(fiveAnswer == "A"):
+  #Increment score by 20
+  score += 20
+#Otherwise if fiveAnswer is equal to “B”:
+elif(fiveAnswer == "B"):
+  #Increment score by 10
+  score += 10
+#Otherwise if fiveAnswer is equal to “C”:
+elif(fiveAnswer == "C"):
+  #Decrement score by 10
+  score -=10
+#Otherwise if fiveAnswer is equal to "D":
+elif(fiveAnswer == "D"):
+  #Decrement score by 20
+  score -= 20
+#Otherwise, assuming there was no input:
+else:
+  #Set fiveAnswer equal to the string 0
+  fiveAnswer = "0"
+#end the python block
+end
+
+#Concatenate “fiveAnswer” and a space key to answers variable
+answers += fiveAnswer + " "
+
+#Dealing with possible negatives if two “Strongly Disagrees” for Melancholic were chosen:
+#if the letter at the second index and the eighth index of answers are both "D":
+if(answers[2] == "D" and answers[8] == "D"):
+  #add 20 back to score, since it was decremented in the previous calculation
+  score += 20
+  #take the string value of score modulus 10, set it equal to local variable "phl"
+  phl = str(score % 10)
+  #set local variable "mel" to the string 0
+  mel = "0"
+  #take the string value of the floor division of score/100 modulus 10, set it equal to "cho" variable
+  cho = str(int(score/100) % 10)
+  #take the string value of the floor division of score/1000 set it equal to "sag" variable
+  sag = str(int(score/1000))
+  #make score the integer value of sag, cho, mel and phl concatentated together
+  score = int(sag + cho + mel + phl)
+
+#end the python code
+end
+%>
+
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Question 6” -->
+        <title>Question 6</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “Question 6” -->
+        <h1 class = "font-effect-outline">Question 6</h1>
+        <!--Make a paragraph asking the Choleric Question
+        “You are unwilling to give up an opportunity you came across to someone who may need it more” -->
+        <p class = "question">
+            You are unwilling to give up an opportunity you came across to someone who may need it more.
+        </p>
+    <!--Make a form with action attribute that goes to “/q7” and post method attribute: -->
+    <form action = "/q7"
+          method = "post">
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “score”
+            Value attribute will be the python value of “score” -->
+        <input type = "hidden"
+               name = "score"
+               value = "{{ score }}" />
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “answers”
+            Value attribute will be the python value of “answers” -->
+        <input type = "hidden"
+               name = "answers"
+               value = "{{ answers }}" />
+
+        <!--Make a paragraph for first answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “sixAnswer”
+                id attribute is “A”
+                value attribute is also “A” -->
+            <input type = "radio"
+               name = "sixAnswer"
+               id = "A"
+               value = "A" />
+            <!--label attribute is “Strongly Agree” -->
+            <label for = "A">Strongly Agree</label>
+        </p>
+        <!--Make a paragraph for second answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “sixAnswer”
+                id attribute is “B”
+                value attribute is also “B” -->
+            <input type = "radio"
+               name = "sixAnswer"
+               id = "B"
+               value = "B" />
+             <!--label attribute is “Agree” -->
+            <label for = "B">Agree</label>
+        </p>
+        <!--Make a paragraph for third answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “sixAnswer”
+                id attribute is “C”
+            value attribute is also “C” -->
+            <input type = "radio"
+               name = "sixAnswer"
+               id = "C"
+               value = "C"/>
+             <!--label attribute is “Disagree” -->
+            <label for = "C">Disagree</label>
+        </p>
+        <!--Make a paragraph for fourth answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “sixAnswer”
+                id attribute is “D”
+                value attribute is also “D” -->
+            <input type = "radio"
+               name = "sixAnswer"
+               id = "D"
+               value = "D"/>
+             <!--label attribute is “Strongly Disagree” -->
+            <label for = "D">Strongly Disagree</label>
+        </p>
+        <!--Make a paragraph for submit button: -->
+        <p>
+            <!-- Button type is “submit” -->
+            <button type = "submit">
+            <!--and the text will be “next” -->
+            Next
+        </button>
+        </p>
+    </form>
+    <!--Make a form for back button: -->
+    <form>
+        <!--Button type is “button”, onclick event is “history.back()” method, text is “Back” -->
+        <button type = "button"
+                onclick = "history.back()">
+            Back
+        </button>
+    </form>
+    </body>

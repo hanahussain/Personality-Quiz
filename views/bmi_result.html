@@ -1,0 +1,95 @@
+<%
+#import request from bottle
+from bottle import request
+
+#request the value of "feet" and set it equal to feet variable
+feet = request.forms.get("feet")
+
+#request the value of "inches" and set it equal to inches variable
+inches = request.forms.get("inches")
+
+#request the value of "weight" and set it equal to weight variable
+weight = request.forms.get("weight")
+
+
+#cast feet into an integer
+feet = int(feet)
+
+#cast inches into an float
+inches = float(inches)
+
+#cast weight into an integer
+weight = int(weight)
+
+
+#multiply feet variable with 12, add that to existing inches and set equal to height variable
+height = (feet*12) + inches
+
+#divide weight by height squared, multiply by 703 and set product equal to bmi variable
+bmi = (weight / (height ** 2)) * 703
+
+#round bmi to 1 decimal
+bmi = round(bmi, 1)
+
+
+#declare a status variable to be an empty string
+status = ""
+#if bmi is below 18.5:
+if(bmi < 18.5):
+  #set status to "underweight"
+  status = "underweight"
+#otherwise if bmi is less than or equal to 24.9:
+elif(bmi <= 24.9):
+  #set status to "healthy"
+  status = "healthy"
+#otherwise if bmi is less than or equal to 29.9:
+elif(bmi <= 29.9):
+  #set status to "overweight"
+  status = "overweight"
+#otherwise:
+else:
+  #set status equal to "obese"
+  status = "obese"
+
+#end python code
+end
+%>
+
+<!-- -->
+<!DOCTYPE html>
+<!-- -->
+<html lang = "en-us">
+    <!-- -->
+    <head>
+        <!--title the tab "BMI Result" -->
+        <title>BMI Result</title>
+        <!--make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to bmiResultStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/bmiResultStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright' rel='stylesheet'>
+    </head>
+
+    <!-- -->
+    <body>
+        <!-- -->
+        <h1>Result</h1>
+        <!-- -->
+        <p id = "first">
+            Your BMI is {{ bmi }}, indicating your weight is in the {{ status }} category for your height.
+        </p>
+        <p></p>
+        <!-- -->
+        <h2>BMI Categories</h2>
+        <!-- -->
+        <p> Underweight: less than 18.5 </p>
+        <!-- -->
+        <p> Healthy: between 18.5 and 24.9 </p>
+        <!-- -->
+        <p> Overweight: between 25 and 29.9 </p>
+        <!-- -->
+        <p> Obese: over 30 </p>
+    </body>

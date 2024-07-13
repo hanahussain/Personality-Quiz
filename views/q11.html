@@ -1,0 +1,174 @@
+<!--Have a chunk of python code -->
+<%
+#Import request library
+from bottle import request
+
+#Request the “tenAnswer” from the previous page and set it equal to “tenAnswer”
+tenAnswer = request.forms.get("tenAnswer")
+#Request the “score” variable from the previous page and set it equal to “score”
+score = request.forms.get("score")
+#Request the “answers” from the previous page and set it equal to “answers”
+answers = request.forms.get("answers")
+
+#If the previous score ends in 0.1 because of phlegmatic negatives:
+if(score.endswith(".1")):
+  #convert score into a float
+  score = float(score)
+#otherwise
+else:
+  #cast score into a float before casting it into an int
+  score = int(float(score))
+#end the python block
+end
+
+#If the floor division of score/10 modulus 10 is greater than 0:
+if(int(score/10) % 10 > 0):
+  #If tenAnswer is equal to “A”:
+  if(tenAnswer == "A"):
+    #Increment score by 20
+    score += 20
+  #Otherwise if tenAnswer is equal to “B”:
+  elif(tenAnswer == "B"):
+    #Increment score by 10
+    score += 10
+  #Otherwise if tenAnswer is equal to “C”:
+  elif(tenAnswer == "C"):
+    #Decrement score by 10
+    score -=10
+  #Otherwise if tenAnswer is equal to "D":
+  elif(tenAnswer == "D"):
+    #If the floor division of score/10 modulus 10 is greater than 1:
+    if(int(score/10) % 10 > 1):
+      #Decrement score by 20
+      score -= 20
+    #Otherwise:
+    else:
+      score -= 10
+    #end the python block
+    end
+  #Otherwise, assuming there was no input:
+  else:
+    #Set tenAnswer equal to the string 0
+    tenAnswer = "0"
+  #end the python block
+  end
+#end the python block
+end
+
+
+#Concatenate “tenAnswer” and a space key to answers variable
+answers += tenAnswer + " "
+
+#end the python code
+end
+%>
+
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Question 11” -->
+        <title>Question 11</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “Question 11” -->
+        <h1 class = "font-effect-outline">Question 11</h1>
+        <!--Make a paragraph asking the Saguine Question “You can be referred to as the life of the party” -->
+        <p class = "question">
+            You can be referred to as the life of the party.
+        </p>
+    <!--Make a form with action attribute that goes to “/q12” and post method attribute: -->
+    <form action = "/q12"
+          method = "post">
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “score”
+            Value attribute will be the python value of “score” -->
+        <input type = "hidden"
+               name = "score"
+               value = "{{ score }}" />
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “answers”
+            Value attribute will be the python value of “answers” -->
+        <input type = "hidden"
+               name = "answers"
+               value = "{{ answers }}" />
+
+        <!--Make a paragraph for first answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “elevenAnswer”
+                id attribute is “A”
+                value attribute is also “A” -->
+            <input type = "radio"
+               name = "elevenAnswer"
+               id = "A"
+               value = "A" />
+            <!--label attribute is “Strongly Agree” -->
+            <label for = "A">Strongly Agree</label>
+        </p>
+        <!--Make a paragraph for second answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “elevenAnswer”
+                id attribute is “B”
+                value attribute is also “B” -->
+            <input type = "radio"
+               name = "elevenAnswer"
+               id = "B"
+               value = "B" />
+             <!--label attribute is “Agree” -->
+            <label for = "B">Agree</label>
+        </p>
+        <!--Make a paragraph for third answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “elevenAnswer”
+                id attribute is “C”
+            value attribute is also “C” -->
+            <input type = "radio"
+               name = "elevenAnswer"
+               id = "C"
+               value = "C"/>
+             <!--label attribute is “Disagree” -->
+            <label for = "C">Disagree</label>
+        </p>
+        <!--Make a paragraph for fourth answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “elevenAnswer”
+                id attribute is “D”
+                value attribute is also “D” -->
+            <input type = "radio"
+               name = "elevenAnswer"
+               id = "D"
+               value = "D"/>
+             <!--label attribute is “Strongly Disagree” -->
+            <label for = "D">Strongly Disagree</label>
+        </p>
+        <!--Make a paragraph for submit button: -->
+        <p>
+            <!-- Button type is “submit” -->
+            <button type = "submit">
+            <!--and the text will be “next” -->
+            Next
+        </button>
+        </p>
+    </form>
+    <form>
+        <button type = "button"
+                onclick = "history.back()">
+            Back
+        </button>
+    </form>
+    </body>

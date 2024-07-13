@@ -1,0 +1,72 @@
+/*In body: */
+body {
+    /*Make the background gradient from light pruple to pink */
+    background-image: linear-gradient(#ddd3ee, #ffd0d7);
+    /*Re-size background height to 250% of its original size*/
+    background-size: 100% 250%;
+}
+
+/*Have a class called biggerImg for the start and qResult pages: */
+.biggerImg {
+    /*Make the background gradient from light pruple to pink */
+    background-image: linear-gradient(#ddd3ee, #ffd0d7);
+    /*Re-size background height to 250% of its original size*/
+    background-size: 100% 450%;
+}
+
+/*In h1: */
+h1 {
+    /*Make the font "Cormorant Upright" */
+    font-family: 'Cormorant Upright';
+    /*Make the size of the header 37px */
+    font-size: 40px;
+}
+
+/*In p: */
+p {
+    /*Make the font Cormorant Upright */
+    font-family: 'Cormorant Upright';
+    /*Make the font size 20px */
+    font-size: 20px;
+    /*Make the text color gray */
+    color: gray;
+}
+
+/*In level 2 header: */
+h2 {
+    /*Make the font Cormorant Upright */
+    font-family: 'Cormorant Upright';
+    /*Make the text color gray */
+    color: #767676;
+}
+
+/*In label: */
+label {
+    /*Make the font PT Serif */
+    font-family: 'PT Serif', serif;
+    /*Make the font size 19px */
+    font-size: 17px;
+    /*Make the text color gray */
+    color: gray;
+}
+
+
+/*In button: */
+button {
+    /*Make the font size 15px */
+    font-size: 15px;
+    /*Make the font "Cormorant Upright" */
+    font-family: 'Cormorant Upright';
+    /*Make the button wide */
+    class: "wide"
+}
+
+/*In unordered list: */
+ul li {
+    /*Make the font "Cormorant Upright" */
+    font-family: 'Cormorant Upright';
+    /*Make the font size 20px */
+    font-size: 20px;
+    /*Make the text color gray */
+    color: gray;
+}

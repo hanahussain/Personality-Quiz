@@ -1,0 +1,181 @@
+<!--Have a chunk of python code -->
+<%
+#Import request library
+from bottle import request
+
+#Request the “eightAnswer” from the previous page and set it equal to “eightAnswer”
+eightAnswer = request.forms.get("eightAnswer")
+#Request the “score” variable from the previous page and set it equal to “score”
+score = request.forms.get("score")
+#Request the “answers” from the previous page and set it equal to “answers”
+answers = request.forms.get("answers")
+
+#If the previous score ends in 0.1 because of phlegmatic negatives:
+if(score.endswith(".1")):
+  #convert score into a float
+  score = float(score)
+#otherwise
+else:
+  #cast score into a float before casting it into an int
+  score = int(float(score))
+
+#If eightAnswer is equal to “A”:
+if(eightAnswer == "A"):
+  #Increment score by 2
+  score += 2
+#Otherwise if eightAnswer is equal to “B”:
+elif(eightAnswer == "B"):
+  #Increment score by 1
+  score += 1
+#Otherwise if eightAnswer is equal to “C”:
+elif(eightAnswer == "C"):
+  #Decrement score by 1
+  score -=1
+#Otherwise if eightAnswer is equal to "D":
+elif(eightAnswer == "D"):
+  #Decrement score by 2
+  score -= 2
+#Otherwise, assuming there was no input:
+else:
+  #Set eightAnswer equal to the string 0
+  eightAnswer = "0"
+#end the python block
+end
+
+#Concatenate “eightAnswer” and a space key to answers variable
+answers += eightAnswer + " "
+
+#Dealing with possible negatives/score update errors if two “Strongly Disagrees” for Phlegmatic were chosen:
+#if the letter at the sixth index and the fourteenth index of answers are both "D":
+if(answers[6] == "D" and answers[14] == "D"):
+  #add 2 back to score, since it was decremented in the previous calculation
+  score += 2
+  #set local variable “phl” to the string value of 0.1 to not ruin digit values
+  phl = "0.1"
+  #take the string value of the floor division of score/10 modulus 10, set it equal to “mel” variable
+  mel = str(int(score/10) % 10)
+  #take the string value of the floor division of score/100 modulus 10, set it equal to "cho" variable
+  cho = str(int(score/100) % 10)
+  #take the string value of the floor division of score/1000 set it equal to "sag" variable
+  sag = str(int(score/1000))
+  #make score the integer value of sag, cho, mel and phl concatentated together
+  score = float(sag + cho + mel + phl)
+  score = round(score, 1)
+
+
+#end the python code
+end
+%>
+
+<!DOCTYPE html>
+<!--Declare the html to be english -->
+<html lang = "en-us">
+    <!--In the head container: -->
+    <head>
+        <!--Make the title of the tab “Question 9” -->
+        <title>Question 9</title>
+        <!--Make the charset UTF-8 -->
+        <meta charset = "utf-8"/>
+        <!--add a link to quizStyle.css, rel "stylesheet" and type attribute "text/css" -->
+        <link rel = "stylesheet"
+              type = "text/css"
+              href = "/static/quizStyle.css" />
+        <!--have a reference link to the google fonts for "Cormorant Upright" and relative attribute "stylesheet" -->
+        <link href='https://fonts.googleapis.com/css?family=Cormorant Upright&effect=outline' rel='stylesheet'>
+    </head>
+
+    <!--In the body container: -->
+    <body>
+        <!--Make a level 1 header saying “Question 9” -->
+        <h1 class = "font-effect-outline">Question 9</h1>
+        <!--Make a paragraph asking the Choleric Question
+        “You are assertive and confident” -->
+        <p class = "question">
+            You are assertive and confident.
+        </p>
+    <!--Make a form with action attribute that goes to “/q10” and post method attribute: -->
+    <form action = "/q10"
+          method = "post">
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “score”
+            Value attribute will be the python value of “score” -->
+        <input type = "hidden"
+               name = "score"
+               value = "{{ score }}" />
+        <!--Make an input of type “hidden” that will send the data without the user seeing it:
+            Name attribute will be “answers”
+            Value attribute will be the python value of “answers” -->
+        <input type = "hidden"
+               name = "answers"
+               value = "{{ answers }}" />
+
+        <!--Make a paragraph for first answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “nineAnswer”
+                id attribute is “A”
+                value attribute is also “A” -->
+            <input type = "radio"
+               name = "nineAnswer"
+               id = "A"
+               value = "A" />
+            <!--label attribute is “Strongly Agree” -->
+            <label for = "A">Strongly Agree</label>
+        </p>
+        <!--Make a paragraph for second answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “nineAnswer”
+                id attribute is “B”
+                value attribute is also “B” -->
+            <input type = "radio"
+               name = "nineAnswer"
+               id = "B"
+               value = "B" />
+             <!--label attribute is “Agree” -->
+            <label for = "B">Agree</label>
+        </p>
+        <!--Make a paragraph for third answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “nineAnswer”
+                id attribute is “C”
+            value attribute is also “C” -->
+            <input type = "radio"
+               name = "nineAnswer"
+               id = "C"
+               value = "C"/>
+             <!--label attribute is “Disagree” -->
+            <label for = "C">Disagree</label>
+        </p>
+        <!--Make a paragraph for fourth answer option: -->
+        <p>
+            <!--Make an input of type radio:
+                name attribute is “nineAnswer”
+                id attribute is “D”
+                value attribute is also “D” -->
+            <input type = "radio"
+               name = "nineAnswer"
+               id = "D"
+               value = "D"/>
+             <!--label attribute is “Strongly Disagree” -->
+            <label for = "D">Strongly Disagree</label>
+        </p>
+        <!--Make a paragraph for submit button: -->
+        <p>
+            <!-- Button type is “submit” -->
+            <button type = "submit">
+            <!--and the text will be “next” -->
+            Next
+        </button>
+        </p>
+    </form>
+    <!--Make a form for back button: -->
+    <form>
+        <!--Button type is “button”, onclick event is “history.back()” method, text is “Back” -->
+        <button type = "button"
+                onclick = "history.back()">
+            Back
+        </button>
+    </form>
+    </body>
